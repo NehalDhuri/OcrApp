@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/inputImageBtn"
+            app:icon="@drawable/add_a_photo"
+            android:text="Take Image"
+            app:cornerRadius="5dp"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recognizeTextBtn"
+            android:text="Recognize Text"
+            app:cornerRadius="5dp"
+            app:icon="@drawable/scanner"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageIv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/image"
+                android:adjustViewBounds="true"
+                app:strokeWidth="2dp"
+                />
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Recognized Text:"
+                />
+            <EditText
+                android:id="@+id/recognizedTextEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:ignore="Autofill" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
