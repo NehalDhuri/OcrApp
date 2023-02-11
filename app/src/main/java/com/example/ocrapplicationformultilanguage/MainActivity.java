@@ -36,6 +36,10 @@ import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.chinese.ChineseTextRecognizerOptions;
+import com.google.mlkit.vision.text.devanagari.DevanagariTextRecognizerOptions;
+import com.google.mlkit.vision.text.japanese.JapaneseTextRecognizerOptions;
+import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.io.IOException;
@@ -93,6 +97,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(), "" + autoCompleteTextView.getText().toString(), Toast.LENGTH_SHORT).show();
+                // for latin
+                if(autoCompleteTextView.getText().toString().equals(langauge_dictionary[0])){
+                    //text recognizer
+                    textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+                }
+                // for Devanagari
+                else if(autoCompleteTextView.getText().toString().equals(langauge_dictionary[1])){
+
+                    textRecognizer = TextRecognition.getClient(new DevanagariTextRecognizerOptions.Builder().build());
+                }
+                // for Chinese
+                else if(autoCompleteTextView.getText().toString().equals(langauge_dictionary[2])){
+
+                    textRecognizer = TextRecognition.getClient(new ChineseTextRecognizerOptions.Builder().build());
+                }
+                // for Japanese
+                else if(autoCompleteTextView.getText().toString().equals(langauge_dictionary[3])){
+
+                    textRecognizer = TextRecognition.getClient(new JapaneseTextRecognizerOptions.Builder().build());
+                }
+                // for Korean
+                else if(autoCompleteTextView.getText().toString().equals(langauge_dictionary[4])){
+
+                    textRecognizer = TextRecognition.getClient(new KoreanTextRecognizerOptions.Builder().build());
+                } else{
+                    textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+                }
             }
         });
 
@@ -104,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
 
         //text recognizer
-        textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+//        textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
         //Handle click, show input image dialog
         inputImageBtn.setOnClickListener(view -> showInputImageDialog());
