@@ -8,6 +8,25 @@
     android:padding="10dp"
     tools:context=".MainActivity">
 
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       android:layout_marginBottom="8dp"
+        android:hint="Select Language"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="none"
+            tools:text="Happy" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,10 +75,11 @@
                 android:layout_marginTop="10dp"
                 android:text="Recognized Text:"
                 />
+
             <EditText
                 android:id="@+id/recognizedTextEt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="74dp"
                 android:textSize="12sp"
                 tools:ignore="Autofill" />
         </LinearLayout>

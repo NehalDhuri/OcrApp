@@ -21,6 +21,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton inputImageBtn;
     private ShapeableImageView imageIv;
     private EditText recognizedTextEt;
+    private AutoCompleteTextView autoCompleteTextView;
 
     private static final String TAG = "MAIN_TAG";
 
@@ -72,6 +77,24 @@ public class MainActivity extends AppCompatActivity {
         MaterialButton recognizeTextBtn = findViewById(R.id.recognizeTextBtn);
         imageIv = findViewById(R.id.imageIv);
         recognizedTextEt = findViewById(R.id.recognizedTextEt);
+
+
+        autoCompleteTextView = findViewById(R.id.autoCompleteTextView);
+        // data to inflate the drop-down items
+        String[] langauge_dictionary = new String[]{"Latin", "Devanagari ", "Chinese","Japanese", "Korean "};
+
+        // create an array adapter and pass the required parameter
+        // in our case pass the context, drop down layout , and array.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.dropdown_item, langauge_dictionary);
+        autoCompleteTextView.setAdapter(adapter);
+
+        //
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getApplicationContext(), "" + autoCompleteTextView.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -213,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult(
+    private final ActivityResultLauncher<Intent> cameraActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
