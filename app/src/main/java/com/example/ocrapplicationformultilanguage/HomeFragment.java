@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(), "" + autoCompleteTextView.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "" + autoCompleteTextView.getText().toString(), Toast.LENGTH_SHORT).show();
                 // for latin
                 if(autoCompleteTextView.getText().toString().equals(langauge_dictionary[0])){
                     //text recognizer

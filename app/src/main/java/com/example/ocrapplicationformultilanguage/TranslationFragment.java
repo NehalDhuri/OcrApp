@@ -8,8 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,7 +34,12 @@ import okhttp3.Response;
 public class TranslationFragment extends Fragment {
 
     private TextView textView;
-    private Button button;
+    private Button translateBtn;
+    private AutoCompleteTextView autoCompleteTextViewFrom;
+    private AutoCompleteTextView autoCompleteTextViewTo;
+    private TextInputEditText sourceEditText;
+    private TextInputEditText translatedEditText;
+
 
 
     OkHttpClient client;
@@ -40,18 +49,34 @@ public class TranslationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_translation, container, false);
+
+
+        autoCompleteTextViewFrom = view.findViewById(R.id.autoCompleteTextViewFrom);
+        autoCompleteTextViewTo = view.findViewById(R.id.autoCompleteTextViewTo);
+
+        // data to inflate the drop-down items
+        String[] langauge_dictionary = new String[]{"Afrikaans", "Arabic", "Danish","English", "German","Hindi","Marathi"};
+//        String[] langauge_dictionary = new String[]{"Afrikaans", "Arabic", "Danish","English", "German","Hindi","Marathi"};
+
+        // create an array adapter and pass the required parameter
+        // in our case pass the context, drop down layout , and array.
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, langauge_dictionary);
+        autoCompleteTextViewFrom.setAdapter(adapter);
+        autoCompleteTextViewTo.setAdapter(adapter);
 
 //        super.onCreate(savedInstanceState);
 
         client = new OkHttpClient();
 
-        textView = view.findViewById(R.id.demo);
-        button = view.findViewById(R.id.button);
+        sourceEditText = view.findViewById(R.id.sourceEditText);
+        translatedEditText = view.findViewById(R.id.translatedEditText);
 
+        translateBtn = view.findViewById(R.id.translateBtn);
 
-        button.setOnClickListener(view1 -> {
+        translateBtn.setOnClickListener(view1 -> {
             post();
         });
         return view;
