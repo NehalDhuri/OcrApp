@@ -1,16 +1,13 @@
 package com.example.ocrapplicationformultilanguage;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -37,22 +34,19 @@ public class MainActivity2 extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         replaceFragment(homeFragment);
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case home:
-                        replaceFragment(homeFragment);
-                        return true;
-                    case notes:
-                        replaceFragment(notesFragment);
-                        return true;
-                    case translator:
-                        replaceFragment(translationFragment);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case home:
+                    replaceFragment(homeFragment);
+                    return true;
+                case notes:
+                    replaceFragment(notesFragment);
+                    return true;
+                case translator:
+                    replaceFragment(translationFragment);
+                    return true;
             }
+            return false;
         });
 
     }
@@ -60,7 +54,7 @@ public class MainActivity2 extends AppCompatActivity {
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.framelayout,fragment);
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
 }
