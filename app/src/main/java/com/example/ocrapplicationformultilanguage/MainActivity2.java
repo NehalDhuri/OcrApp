@@ -22,6 +22,12 @@ public class MainActivity2 extends AppCompatActivity {
     NotesFragment notesFragment = new NotesFragment();
     TranslationFragment translationFragment = new TranslationFragment();
 
+    final int home = R.id.home;
+    final int notes = R.id.notes;
+    final int translator = R.id.translator;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +41,13 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.home:
+                    case home:
                         replaceFragment(homeFragment);
                         return true;
-                    case R.id.notes:
+                    case notes:
                         replaceFragment(notesFragment);
                         return true;
-                    case R.id.translator:
+                    case translator:
                         replaceFragment(translationFragment);
                         return true;
                 }
