@@ -145,8 +145,6 @@ public class HomeFragment extends Fragment {
         progressDialog.setTitle("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
 
-        //text recognizer
-//        textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
 
         //Handle click, show input image dialog
 
@@ -224,6 +222,7 @@ public class HomeFragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_PICK);
 
         intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
         galleryActivityResultLauncher.launch(intent);
 
     }
@@ -241,13 +240,13 @@ public class HomeFragment extends Fragment {
 
                         if (data != null
                                 && data.getData() != null) {
-                            Uri selectedImageUri = data.getData();
+                            imageUri = data.getData();
                             Bitmap selectedImageBitmap = null;
                             try {
                                 selectedImageBitmap
                                         = MediaStore.Images.Media.getBitmap(
                                         requireContext().getContentResolver(),
-                                        selectedImageUri);
+                                        imageUri);
                             }
                             catch (IOException e) {
                                 e.printStackTrace();
@@ -256,8 +255,6 @@ public class HomeFragment extends Fragment {
                                     selectedImageBitmap);
                         }
 
-                        //set to imageview
-//                        imageIv.setImageURI(imageUri);
                     } else {
                         //cancelled
                         Toast.makeText(getContext(), "Cancelled...", Toast.LENGTH_SHORT).show();
