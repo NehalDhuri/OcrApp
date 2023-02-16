@@ -52,8 +52,6 @@ public class TranslationFragment extends Fragment {
 
     OkHttpClient client;
 
-    String postURL = "https://google-translate1.p.rapidapi.com/language/translate/v2";
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -167,18 +165,17 @@ public class TranslationFragment extends Fragment {
 
     public void post(String sourceLang, String targetLang) {
         RequestBody body = new FormBody.Builder()
-                .add("q", Objects.requireNonNull(sourceEditText.getText()).toString())
-                .add("target", targetLang)
-                .add("source", sourceLang)
+                .add("source_language", sourceLang )
+                .add("target_language", targetLang)
+                .add("text", Objects.requireNonNull(sourceEditText.getText()).toString())
                 .build();
 
         Request request = new Request.Builder()
-                .url("https://google-translate1.p.rapidapi.com/language/translate/v2")
+                .url("https://text-translator2.p.rapidapi.com/translate")
                 .post(body)
                 .addHeader("content-type", "application/x-www-form-urlencoded")
-                .addHeader("Accept-Encoding", "application/gzip")
                 .addHeader("X-RapidAPI-Key", "1cbb6a14d5msh02d6df95b649332p165bb5jsn11cd76766d0f")
-                .addHeader("X-RapidAPI-Host", "google-translate1.p.rapidapi.com")
+                .addHeader("X-RapidAPI-Host", "text-translator2.p.rapidapi.com")
                 .build();
 
 
@@ -200,9 +197,7 @@ public class TranslationFragment extends Fragment {
 
                             JSONObject jsonObject = new JSONObject(resp);
                             JSONObject data = jsonObject.getJSONObject("data");
-                            JSONArray translations = data.getJSONArray("translations");
-                            JSONObject translatedText = translations.getJSONObject(0);
-                            String result = translatedText.getString("translatedText");
+                            String result = data.getString("translatedText");
                             translatedEditText.setText(result);
                         } catch (IOException | JSONException e) {
                             e.printStackTrace();
