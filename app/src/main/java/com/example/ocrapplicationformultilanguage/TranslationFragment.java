@@ -64,25 +64,247 @@ public class TranslationFragment extends Fragment {
         autoCompleteTextViewTo = view.findViewById(R.id.autoCompleteTextViewTo);
 
         // data to inflate the drop-down items
-        String[] langauge_dictionary = new String[]{"Afrikaans", "Arabic", "Danish", "English", "German", "Hindi", "Marathi"};
+//        String[] language_dictionary = new String[]{"Afrikaans", "Arabic", "Danish", "English", "German", "Hindi", "Marathi"};
+        String[] language_dictionary = new String[]{"Afrikaans",
+                "Albanian",
+                "Amharic",
+                "Arabic",
+                "Armenian",
+                "Azerbaijani",
+                "Basque",
+                "Belarusian",
+                "Bengali",
+                "Bosnian",
+                "Bulgarian",
+                "Catalan",
+                "Cebuano",
+                "Chichewa",
+                "Chinese (Simplified)",
+                "Chinese (Traditional)",
+                "Corsican",
+                "Croatian",
+                "Czech",
+                "Danish",
+                "Dutch",
+                "English",
+                "Esperanto",
+                "Estonian",
+                "Filipino",
+                "Finnish",
+                "French",
+                "Frisian",
+                "Galician",
+                "Georgian",
+                "German",
+                "Greek",
+                "Gujarati",
+                "Haitian Creole",
+                "Hausa",
+                "Hawaiian",
+                "Hebrew",
+                "Hindi",
+                "Hmong",
+                "Hungarian",
+                "Icelandic",
+                "Igbo",
+                "Indonesian",
+                "Irish",
+                "Italian",
+                "Japanese",
+                "Javanese",
+                "Kannada",
+                "Kazakh",
+                "Khmer",
+                "Kinyarwanda",
+                "Korean",
+                "Kurdish (Kurmanji)",
+                "Kyrgyz",
+                "Lao",
+                "Latin",
+                "Latvian",
+                "Lithuanian",
+                "Luxembourgish",
+                "Macedonian",
+                "Malagasy",
+                "Malay",
+                "Malayalam",
+                "Maltese",
+                "Maori",
+                "Marathi",
+                "Mongolian",
+                "Myanmar (Burmese)",
+                "Nepali",
+                "Norwegian",
+                "Odia (Oriya)",
+                "Pashto",
+                "Persian",
+                "Polish",
+                "Portuguese",
+                "Punjabi",
+                "Romanian",
+                "Russian",
+                "Samoan",
+                "Scots Gaelic",
+                "Serbian",
+                "Sesotho",
+                "Shona",
+                "Sindhi",
+                "Sinhala",
+                "Slovak",
+                "Slovenian",
+                "Somali",
+                "Spanish",
+                "Sundanese",
+                "Swahili",
+                "Swedish",
+                "Tajik",
+                "Tamil",
+                "Tatar",
+                "Telugu",
+                "Thai",
+                "Turkish",
+                "Turkmen",
+                "Ukrainian",
+                "Urdu",
+                "Uyghur",
+                "Uzbek",
+                "Vietnamese",
+                "Welsh",
+                "Xhosa",
+                "Yiddish",
+                "Yoruba",
+                "Zulu",
+                "Hebrew",
+                "Chinese (Simplified)"};
 
+        String[] languages_code = new String[]{"af",
+                "sq",
+                "am",
+                "ar",
+                "hy",
+                "az",
+                "eu",
+                "be",
+                "bn",
+                "bs",
+                "bg",
+                "ca",
+                "ceb",
+                "ny",
+                "zh-CN",
+                "zh-TW",
+                "co",
+                "hr",
+                "cs",
+                "da",
+                "nl",
+                "en",
+                "eo",
+                "et",
+                "tl",
+                "fi",
+                "fr",
+                "fy",
+                "gl",
+                "ka",
+                "de",
+                "el",
+                "gu",
+                "ht",
+                "ha",
+                "haw",
+                "iw",
+                "hi",
+                "hmn",
+                "hu",
+                "is",
+                "ig",
+                "id",
+                "ga",
+                "it",
+                "ja",
+                "jw",
+                "kn",
+                "kk",
+                "km",
+                "rw",
+                "ko",
+                "ku",
+                "ky",
+                "lo",
+                "la",
+                "lv",
+                "lt",
+                "lb",
+                "mk",
+                "mg",
+                "ms",
+                "ml",
+                "mt",
+                "mi",
+                "mr",
+                "mn",
+                "my",
+                "ne",
+                "no",
+                "or",
+                "ps",
+                "fa",
+                "pl",
+                "pt",
+                "pa",
+                "ro",
+                "ru",
+                "sm",
+                "gd",
+                "sr",
+                "st",
+                "sn",
+                "sd",
+                "si",
+                "sk",
+                "sl",
+                "so",
+                "es",
+                "su",
+                "sw",
+                "sv",
+                "tg",
+                "ta",
+                "tt",
+                "te",
+                "th",
+                "tr",
+                "tk",
+                "uk",
+                "ur",
+                "ug",
+                "uz",
+                "vi",
+                "cy",
+                "xh",
+                "yi",
+                "yo",
+                "zu",
+                "he",
+                "zh"};
         // create an array adapter and pass the required parameter
         // in our case pass the context, drop down layout , and array.
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, langauge_dictionary);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.dropdown_item, language_dictionary);
         autoCompleteTextViewFrom.setAdapter(adapter);
         autoCompleteTextViewTo.setAdapter(adapter);
 
         autoCompleteTextViewFrom.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sourceLang = sourceLanguage(langauge_dictionary);
+                sourceLang = sourceLanguage(language_dictionary,languages_code);
             }
         });
 
         autoCompleteTextViewTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                targetLang = targetLanguage(langauge_dictionary);
+                targetLang = targetLanguage(language_dictionary,languages_code);
             }
         });
 
@@ -101,71 +323,34 @@ public class TranslationFragment extends Fragment {
     }
 
 
-    public String sourceLanguage(String[] langauge_dictionary) {
+    public String sourceLanguage(String[] language_dictionary, String[] language_code) {
         String tempSourceLang = " ";
-        if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[0])) {
 
-            // for Afrikaans
-            tempSourceLang = "af";
-        } else if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[1])) {
-            // for Arabic
+        for (int i = 0; i < language_dictionary.length; i++) {
+            if (autoCompleteTextViewFrom.getText().toString().equals(language_dictionary[i])) {
 
-            tempSourceLang = "ar";
-        } else if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[2])) {
-            // for Danish
-            tempSourceLang = "da";
-        } else if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[3])) {
-            // for English
-            tempSourceLang = "en";
-        } else if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[4])) {
-            //German
-            tempSourceLang = "de";
-        } else if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[5])) {
-            //Hindi
-            tempSourceLang = "hi";
-        } else if (autoCompleteTextViewFrom.getText().toString().equals(langauge_dictionary[6])) {
-            //Marathi
-            tempSourceLang = "mr";
-        } else {
-            Toast.makeText(getContext(), "Please select your language!", Toast.LENGTH_SHORT).show();
+                return language_code[i];
+            }
         }
+
         return tempSourceLang;
     }
 
-    public String targetLanguage(String[] langauge_dictionary) {
+    public String targetLanguage(String[] language_dictionary,String[] language_code) {
         String tempTargetLang = "";
-        if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[0])) {
 
-            // for Afrikaans
-            tempTargetLang = "af";
-        } else if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[1])) {
-            // for Arabic
-
-            tempTargetLang = "ar";
-        } else if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[2])) {
-            // for Danish
-            tempTargetLang = "da";
-        } else if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[3])) {
-            // for English
-            tempTargetLang = "en";
-        } else if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[4])) {
-            //German
-            tempTargetLang = "de";
-        } else if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[5])) {
-            //Hindi
-            tempTargetLang = "hi";
-        } else if (autoCompleteTextViewTo.getText().toString().equals(langauge_dictionary[6])) {
-            //Marathi
-            tempTargetLang = "mr";
-        } else {
-            Toast.makeText(getContext(), "Please select your language!", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < language_dictionary.length; i++) {
+            if (autoCompleteTextViewTo.getText().toString().equals(language_dictionary[i])) {
+                return language_code[i];
+            }
         }
+
         return tempTargetLang;
     }
 
     public void post(String sourceLang, String targetLang) {
         RequestBody body = new FormBody.Builder()
-                .add("source_language", sourceLang )
+                .add("source_language", sourceLang)
                 .add("target_language", targetLang)
                 .add("text", Objects.requireNonNull(sourceEditText.getText()).toString())
                 .build();
