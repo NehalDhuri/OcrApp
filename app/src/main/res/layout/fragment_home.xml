@@ -81,7 +81,7 @@
                     android:id="@+id/recognizedTextEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="12sp"
+                    android:textSize="18sp"
                     tools:ignore="Autofill" />
             </LinearLayout>
         </ScrollView>
