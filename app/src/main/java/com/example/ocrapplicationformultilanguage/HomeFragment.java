@@ -166,7 +166,7 @@ public class HomeFragment extends Fragment {
         progressDialog.show();
 
         try {
-            InputImage inputImage = InputImage.fromFilePath(getContext(), imageUri);
+            InputImage inputImage = InputImage.fromFilePath(requireContext(), imageUri);
 
             progressDialog.setMessage("Recognizing text....");
 
