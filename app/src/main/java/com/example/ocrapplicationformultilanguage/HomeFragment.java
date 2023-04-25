@@ -3,7 +3,10 @@ package com.example.ocrapplicationformultilanguage;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -20,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -46,12 +51,15 @@ import com.google.mlkit.vision.text.korean.KoreanTextRecognizerOptions;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Objects;
 
 
 public class HomeFragment extends Fragment {
     //UI Views
     private MaterialButton inputImageBtn;
+    private MaterialButton copyButton;
+
     private ShapeableImageView imageIv;
     private EditText recognizedTextEt;
     private AutoCompleteTextView autoCompleteTextView;
@@ -157,6 +165,51 @@ public class HomeFragment extends Fragment {
                 recognizeTextFromImage();
             }
         });
+
+        // Copy Button
+        copyButton = view.findViewById(R.id.copy_btn);
+        copyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("label", recognizedTextEt.getText());
+                clipboard.setPrimaryClip(clip);
+                Toast.makeText(getContext(), "Text copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //share button
+        Button shareButton = view.findViewById(R.id.share_btn);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject of the message");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, recognizedTextEt.getText());
+                startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+
+
+//        Button ttsButton = view.findViewById(R.id.listen_btn);
+
+        ttsButton = view.findViewById(R.id.listen_btn);
+        tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status != TextToSpeech.ERROR) {
+                    tts.setLanguage(Locale.US);
+                }
+            }
+        });
+        ttsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.speak(recognizedTextEt.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
         return view;
     }
 
