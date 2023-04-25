@@ -5,11 +5,11 @@
         android:icon="@drawable/home"
         android:id="@+id/home"
         />
-    <item
-        android:title="Notes"
-        android:icon="@drawable/notes"
-        android:id="@+id/notes"
-        />
+<!--    <item-->
+<!--        android:title="Notes"-->
+<!--        android:icon="@drawable/notes"-->
+<!--        android:id="@+id/notes"-->
+<!--        />-->
     <item
         android:title="Translator"
         android:icon="@drawable/translator"

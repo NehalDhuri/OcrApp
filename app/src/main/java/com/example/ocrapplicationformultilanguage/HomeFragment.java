@@ -59,6 +59,8 @@ public class HomeFragment extends Fragment {
     //UI Views
     private MaterialButton inputImageBtn;
     private MaterialButton copyButton;
+    private MaterialButton ttsButton;
+    private TextToSpeech tts;
 
     private ShapeableImageView imageIv;
     private EditText recognizedTextEt;

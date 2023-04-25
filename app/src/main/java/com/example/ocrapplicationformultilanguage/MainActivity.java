@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 case home:
                     replaceFragment(homeFragment);
                     return true;
-                case notes:
-                    replaceFragment(notesFragment);
-                    return true;
+//                case notes:
+//                    replaceFragment(notesFragment);
+//                    return true;
                 case translator:
                     replaceFragment(translationFragment);
                     return true;
