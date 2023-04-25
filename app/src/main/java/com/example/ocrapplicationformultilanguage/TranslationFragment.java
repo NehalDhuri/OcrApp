@@ -64,7 +64,6 @@ public class TranslationFragment extends Fragment {
         autoCompleteTextViewTo = view.findViewById(R.id.autoCompleteTextViewTo);
 
         // data to inflate the drop-down items
-//        String[] language_dictionary = new String[]{"Afrikaans", "Arabic", "Danish", "English", "German", "Hindi", "Marathi"};
         String[] language_dictionary = new String[]{"Afrikaans",
                 "Albanian",
                 "Amharic",

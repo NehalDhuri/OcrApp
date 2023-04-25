@@ -85,12 +85,6 @@ public class HomeFragment extends Fragment {
     //TextRecognizer
     private TextRecognizer textRecognizer;
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//
-//
-//    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
