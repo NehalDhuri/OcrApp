@@ -64,11 +64,10 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageIv"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/image"
+                    android:layout_height="304dp"
                     android:adjustViewBounds="true"
-                    app:strokeWidth="2dp"
-                    />
+                    android:src="@drawable/image"
+                    app:strokeWidth="2dp" />
                 <TextView
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="match_parent"
@@ -80,10 +79,9 @@
                 <EditText
                     android:id="@+id/recognizedTextEt"
                     android:layout_width="match_parent"
-                    android:layout_height="99dp"
+                    android:layout_height="182dp"
                     android:textSize="18sp"
-                    tools:ignore="Autofill"
-                    />
+                    tools:ignore="Autofill" />
             </LinearLayout>
 
         </ScrollView>
@@ -97,6 +95,7 @@
                 android:id="@+id/copy_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:icon="@drawable/copy"
                 android:text="copy"
                 android:layout_weight="1"/>
 
@@ -105,6 +104,7 @@
                 android:id="@+id/share_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:icon="@drawable/share"
                 android:text="Share"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -114,6 +114,7 @@
                 android:id="@+id/listen_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:icon="@drawable/voice"
                 android:text="Listen"
                 android:layout_weight="1"/>
         </LinearLayout>

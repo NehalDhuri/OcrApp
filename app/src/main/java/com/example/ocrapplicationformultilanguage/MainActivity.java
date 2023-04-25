@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     TranslationFragment translationFragment = new TranslationFragment();
 
     final int home = R.id.home;
-    final int notes = R.id.notes;
+//    final int notes = R.id.notes;
     final int translator = R.id.translator;
 
 
