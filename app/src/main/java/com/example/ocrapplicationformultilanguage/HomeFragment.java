@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +61,7 @@ public class HomeFragment extends Fragment {
     private MaterialButton inputImageBtn;
     private MaterialButton copyButton;
     private MaterialButton ttsButton;
+    private MaterialButton stopTtsButton;
     private TextToSpeech tts;
 
     private ShapeableImageView imageIv;
@@ -181,16 +183,16 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject of the message");
+//                shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject of the message");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, recognizedTextEt.getText());
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
             }
         });
 
-
-//        Button ttsButton = view.findViewById(R.id.listen_btn);
-
+        //listen
         ttsButton = view.findViewById(R.id.listen_btn);
+        stopTtsButton = view.findViewById(R.id.stop_btn);
+
         tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -199,10 +201,26 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
         ttsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tts.speak(recognizedTextEt.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+
+                ttsButton.setVisibility(View.GONE);
+                stopTtsButton.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+
+        stopTtsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tts.stop();
+                stopTtsButton.setVisibility(View.GONE);
+                ttsButton.setVisibility(View.VISIBLE);
+
             }
         });
 
